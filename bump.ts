@@ -71,7 +71,9 @@ Options:
 
   if (!valid(av)) throw Error(`Latest git tag (v${av}) not a valid semver version`)
 
-  if (args.length !== 1) throw Error('Provided incorrect number of arguments. Must be 1')
+  if (args.length === 0 ) {
+    return `v${await getLatestVersion()}`
+  }
 
   if (args[0] === 'undo') {
     const head = await runWithOutput(['git', 'describe', 'HEAD'])
